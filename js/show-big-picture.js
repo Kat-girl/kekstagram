@@ -31,7 +31,7 @@ const openModal = (element, modal, smallPic) => {
   element.addEventListener('click', () => {
     modal.classList.remove('hidden');
     document.querySelector('body').classList.add('modal-open');
-    document.addEventListener('keydown', onEscKeyDown);
+    document.addEventListener('keydown', onModalEscKeyDown);
 
     bigPicture.src = smallPic.url;
     likesCount.textContent = smallPic.likes;
@@ -48,14 +48,14 @@ const openModal = (element, modal, smallPic) => {
 const hideBigPicture = () => {
   bigPictureContainer.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
-  document.removeEventListener('keydown', onEscKeyDown);
+  document.removeEventListener('keydown', onModalEscKeyDown);
 };
 
 const onCancelButtonClick = () => {
   hideBigPicture();
 };
 
-const onEscKeyDown = (evt) => {
+const onModalEscKeyDown = (evt) => {
   if(evt.key === 'Escape') {
     evt.preventDefault();
     hideBigPicture();
