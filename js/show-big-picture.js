@@ -31,6 +31,8 @@ const openModal = (element, modal, smallPic) => {
   element.addEventListener('click', () => {
     modal.classList.remove('hidden');
     document.querySelector('body').classList.add('modal-open');
+    document.addEventListener('keydown', onEscKeyDown);
+
     bigPicture.src = smallPic.url;
     likesCount.textContent = smallPic.likes;
     commentsCount.textContent = smallPic.comments.length;
@@ -43,18 +45,21 @@ const openModal = (element, modal, smallPic) => {
   });
 };
 
-const closeModal = (element, modal) => {
-  element.addEventListener('click', () => {
-    modal.classList.add('hidden');
-    document.querySelector('body').classList.remove('modal-open');
-  });
+const hideBigPicture = () => {
+  bigPictureContainer.classList.add('hidden');
+  document.querySelector('body').classList.remove('modal-open');
+  document.removeEventListener('keydown', onEscKeyDown);
+};
 
-  document.addEventListener('keydown', (evt) => {
-    if(evt.key === 'Escape') {
-      modal.classList.add('hidden');
-      document.querySelector('body').classList.remove('modal-open');
-    }
-  });
+const onCancelButtonClick = () => {
+  hideBigPicture();
+};
+
+const onEscKeyDown = (evt) => {
+  if(evt.key === 'Escape') {
+    evt.preventDefault();
+    hideBigPicture();
+  }
 };
 
 const showBigPicture = (photos) => {
@@ -65,7 +70,9 @@ const showBigPicture = (photos) => {
     openModal(picturesCollection[i], bigPictureContainer, photos[i]);
   }
 
-  closeModal(bigPictureCancel, bigPictureContainer);
+  bigPictureCancel.addEventListener('click', () => {
+    onCancelButtonClick();
+  });
 };
 
 
