@@ -1,41 +1,52 @@
-/*
-  ЗАДАЧА:
-  Напишите функцию-генератор для получения случайных идентификаторов
-  из указанного диапазона, и так, чтобы они не повторялись,
-  пока не будут перебраны все числа из этого промежутка.
-*/
+const slider = document.querySelector('.level-form__slider');
+const input = document.querySelector('.level-form__input');
+const special = document.querySelector('.level-form__special');
 
-function getRandomPositiveInteger (min, max) {
-  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
-  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
-  const result = Math.random() * (upper - lower + 1) + lower;
+input.value = 20;
 
-  return Math.floor(result);
-}
-
-function createRandomIdFromRangeGenerator (min, max) {
-  const arr = new Array();
-  return function () {
-    let randInt = getRandomPositiveInteger (min, max);
-    if (arr.length >= (max - min + 1)) {
-      console.error('Перебраны все числа из диапазона');
-      return null;
+noUiSlider.create(slider, {
+  range: {
+    min: 0,
+    max: 100
+  },
+  start: 20,
+  step: 1,
+  connect: 'lower',
+  format: {
+    to: function (value) {
+      if (Number.isInteger(value)) {
+        return value;
+      }
+      return value.toFixed(1);
+    },
+    from: function (value) {
+      return parseFloat(value);
     }
-    while (arr.includes(randInt)) {
-      randInt = getRandomPositiveInteger (min, max);
-    }
-    arr.push(randInt);
-    return randInt;
-  };
-}
+  }
+});
 
-const randId = createRandomIdFromRangeGenerator(1, 3);
-console.log(randId());
-console.log(randId());
-console.log(randId());
-console.log(randId());
-console.log(randId());
-console.log(randId());
-console.log(randId());
-console.log(randId());
-console.log(randId());
+slider.noUiSlider.on('update', () => {
+  input.value = slider.noUiSlider.get();
+});
+
+special.addEventListener('change', (evt) => {
+  if (evt.target.checked) {
+    slider.noUiSlider.updateOptions({
+      range: {
+        min: 0,
+        max: 10
+      },
+      start: 2,
+      step: 0.1,
+    });
+  } else {
+    slider.noUiSlider.updateOptions({
+      range: {
+        min: 0,
+        max: 100
+      },
+      start: 20,
+      step: 1,
+    });
+  }
+});

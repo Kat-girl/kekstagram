@@ -21,7 +21,6 @@ const renderPicturesFragment = (photos) => {
 
 const renderPictures = renderPicturesFragment(userPhotos);
 
-
 const showPictures = (container) => {
   container.append(renderPictures);
 };
