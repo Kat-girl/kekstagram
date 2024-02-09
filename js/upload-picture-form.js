@@ -78,3 +78,5 @@ photoDescription.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
 });
 
+export {uploadForm};
+
