@@ -26,6 +26,7 @@ function onImgEscKeyDown (evt) {
 const showImgUploadOverlay = () => {
   imgUploadOverlay.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
+  uploadForm.querySelector('.img-upload__effect-level').classList.add('hidden');
   document.addEventListener('keydown', onImgEscKeyDown);
 };
 

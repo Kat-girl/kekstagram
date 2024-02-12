@@ -32,4 +32,4 @@ scaleControlBigger.addEventListener('click', () => {
   changePictureSize();
 });
 
-
+export {previewImage};
