@@ -18,4 +18,23 @@ const getUniqueNumber = () => {
 
 checkMaxStringLength('ok', 140);
 
-export {getRandomIntInclusive, getRandomArrayElement, getUniqueNumber};
+const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = 0;
+  alertContainer.style.right = 0;
+  alertContainer.style.backgroundColor = '#ff0000';
+  alertContainer.style.padding = '20px';
+  alertContainer.style.fontSize = '25px';
+  alertContainer.style.fontWeight = 700;
+  alertContainer.style.textAlign = 'center';
+  alertContainer.textContent = message;
+  document.querySelector('body').append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, 10000);
+};
+
+export {getRandomIntInclusive, getRandomArrayElement, getUniqueNumber, showAlert};

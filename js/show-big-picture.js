@@ -1,4 +1,3 @@
-const pictures = document.querySelector('.pictures');
 const bigPictureContainer = document.querySelector('.big-picture');
 const commentsLoaderButton = bigPictureContainer.querySelector('.social__comments-loader');
 const commentsCurrent = bigPictureContainer.querySelector('.comments-current');
@@ -92,7 +91,7 @@ function onModalEscKeyDown (evt) {
 }
 
 const showBigPicture = (photos) => {
-  const picturesCollection = pictures.querySelectorAll('.picture');
+  const picturesCollection = document.querySelectorAll('.picture');
   const bigPictureCancel = bigPictureContainer.querySelector('.big-picture__cancel');
 
   for (let i = 0; i < picturesCollection.length; i ++) {
