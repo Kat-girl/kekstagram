@@ -1,7 +1,8 @@
-import {getUserPhotoDescriptions} from './get-user-photo-descriptions.js';
-const userPhotos = getUserPhotoDescriptions();
+import {showBigPicture} from './show-big-picture.js';
 
-const renderPicturesFragment = (photos) => {
+const pictures = document.querySelector('.pictures');
+
+const renderSmallPictures = (photos) => {
   const fragment = document.createDocumentFragment();
   photos.forEach((photo) => {
     const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture').cloneNode(true);
@@ -16,13 +17,8 @@ const renderPicturesFragment = (photos) => {
 
     fragment.append(pictureTemplate);
   });
-  return fragment;
+  pictures.append(fragment);
+  showBigPicture(photos);
 };
 
-const renderPictures = renderPicturesFragment(userPhotos);
-
-const showPictures = (container) => {
-  container.append(renderPictures);
-};
-
-export {showPictures, userPhotos};
+export {renderSmallPictures};
