@@ -1,5 +1,5 @@
-import {uploadForm} from './upload-picture-form.js';
-import {previewImage} from './picture-size-editing.js';
+// import {uploadForm} from './open-user-modal.js';
+import {previewImage, uploadForm} from './picture-size-editing.js';
 
 const effects = uploadForm.querySelector('.img-upload__effects');
 const rangeSlider = uploadForm.querySelector('.effect-level__slider');
@@ -92,3 +92,11 @@ effects.addEventListener('change', (evt) => {
     onSliderUpdate(checkedOption);
   }
 });
+
+const setDefaultFilters = () => {
+  previewImage.className = '';
+  previewImage.style.removeProperty('filter');
+  uploadForm.querySelector('.img-upload__effect-level').classList.add('hidden');
+};
+
+export {setDefaultFilters};

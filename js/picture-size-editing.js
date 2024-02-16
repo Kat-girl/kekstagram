@@ -1,9 +1,16 @@
-import {uploadForm} from './upload-picture-form.js';
+// import {uploadForm} from './open-user-modal.js';
+
+const uploadForm = document.querySelector('#upload-select-image');
 
 const scaleControlSmaller = uploadForm.querySelector('.scale__control--smaller');
 const scaleControlBigger = uploadForm.querySelector('.scale__control--bigger');
 const scaleControlValue = uploadForm.querySelector('.scale__control--value');
 const previewImage = uploadForm.querySelector('.img-upload__preview').children[0];
+
+const setDefaultSize = () => {
+  scaleControlValue.value = '100%';
+  previewImage.style.transform = 'scale(1)';
+};
 
 const changePictureSize = () => {
   if (parseInt(scaleControlValue.value, 10) < 100) {
@@ -26,10 +33,9 @@ scaleControlBigger.addEventListener('click', () => {
   if (parseInt(scaleControlValue.value, 10) < 100) {
     scaleControlValue.value = `${parseInt(scaleControlValue.value, 10) + 25}%`;
   } else {
-    scaleControlValue.value = '100%';
-    previewImage.style.transform = 'scale(1)';
+    setDefaultSize();
   }
   changePictureSize();
 });
 
-export {previewImage};
+export {previewImage, uploadForm, setDefaultSize};
