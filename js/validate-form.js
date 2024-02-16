@@ -47,7 +47,7 @@ photoDescription.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
 });
 
-const setUserFormSubmit = (onSuccess) => {
+const setUserFormSubmit = (onSuccess, onFail) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
@@ -58,7 +58,14 @@ const setUserFormSubmit = (onSuccess) => {
           method: 'POST',
           body: formData
         })
-        .then(() => onSuccess());
+        .then((response) => {
+          if (response.ok) {
+            onSuccess();
+          } else {
+            onFail();
+          }
+        })
+        .catch (() => onFail());
     }
   });
 };
