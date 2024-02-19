@@ -1,7 +1,9 @@
 import { uploadForm } from './open-user-modal.js';
+import {sendData} from './api.js';
 
 const hashtagsInput = uploadForm.querySelector('.text__hashtags');
 const photoDescription = uploadForm.querySelector('.text__description');
+const submitButton = uploadForm.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__input-wrapper',
@@ -47,25 +49,32 @@ photoDescription.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
 });
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Публикуется...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
 const setUserFormSubmit = (onSuccess, onFail) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
-      const formData = new FormData(evt.target);
-      fetch ('https://25.javascript.htmlacademy.pro/kekstagram',
-        {
-          method: 'POST',
-          body: formData
-        })
-        .then((response) => {
-          if (response.ok) {
-            onSuccess();
-          } else {
-            onFail();
-          }
-        })
-        .catch (() => onFail());
+      blockSubmitButton();
+      sendData(
+        () => {
+          onSuccess();
+          unblockSubmitButton();
+        },
+        () => {
+          onFail();
+          unblockSubmitButton();
+        },
+        new FormData(evt.target));
     }
   });
 };
