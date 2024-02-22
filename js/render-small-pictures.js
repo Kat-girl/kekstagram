@@ -1,6 +1,7 @@
 import {showBigPicture} from './show-big-picture.js';
 
 const pictures = document.querySelector('.pictures');
+const imgFilters = document.querySelector('.img-filters');
 
 const renderSmallPictures = (photos) => {
   const fragment = document.createDocumentFragment();
@@ -18,6 +19,7 @@ const renderSmallPictures = (photos) => {
     fragment.append(pictureTemplate);
   });
   pictures.append(fragment);
+  imgFilters.classList.remove('img-filters--inactive');
   showBigPicture(photos);
 };
 
