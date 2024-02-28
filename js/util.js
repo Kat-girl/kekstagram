@@ -34,28 +34,19 @@ const showAlert = (message) => {
 
   setTimeout(() => {
     alertContainer.remove();
-  }, 10000);
+  }, 5000);
 };
 
-const arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
-
-const getUniqueArrayElements = (arr, count) => {
+const getUniqueArrayElements = (arr, length = 10) => {
   const arr2 = new Array();
-  return function () {
-    let newElem = getRandomArrayElement(arr);
-    while (arr2.length < count) {
-      while (arr2.includes(newElem)) {
-        newElem = getRandomArrayElement(arr);
-      }
-      arr2.push(newElem);
+  let newElem = getRandomArrayElement(arr);
+  while (arr2.length < length) {
+    while (arr2.includes(newElem)) {
+      newElem = getRandomArrayElement(arr);
     }
-    return arr2;
-  };
+    arr2.push(newElem);
+  }
+  return arr2;
 };
-
-const arrGet = getUniqueArrayElements(arr1, 10);
-
-console.log(arrGet());
-
 
 export {getRandomIntInclusive, getRandomArrayElement, getUniqueNumber, showAlert, getUniqueArrayElements};

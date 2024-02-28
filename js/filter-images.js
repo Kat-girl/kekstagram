@@ -1,23 +1,41 @@
+import {getUniqueArrayElements} from './util.js';
+import {renderSmallPictures} from './render-small-pictures.js';
+
 const imgFiltersForm = document.querySelector('.img-filters__form');
+const imgFilters = document.querySelector('.img-filters');
 
-const array1 = [15, 2, 3];
+let pictures = [];
+let currentFilter = '';
 
-const showDefault = (arr) => arr;
+const sortCommentsDecsending = (photoA, photoB) => photoB.comments.length - photoA.comments.length;
 
-const sortDescending = (arr) => arr.slice().sort((a, b) => b - a);
+const sortDescending = (arr) => arr.slice().sort(sortCommentsDecsending);
 
 const filters = {
-  'filter-default': (arr) => showDefault(arr),
-  'filter-random': (arr) => sortDescending(arr)
+  'filter-default': () => pictures,
+  'filter-random': () => getUniqueArrayElements(pictures),
+  'filter-discussed': () => sortDescending(pictures)
+};
+
+const turnFilterOn = (data) => {
+  imgFilters.classList.remove('img-filters--inactive');
+  pictures = [...data];
+  currentFilter = filters['filter-default'];
+  currentFilter();
 };
 
 imgFiltersForm.addEventListener('click', (evt) => {
-  imgFiltersForm.querySelectorAll('.img-filters__button').forEach((btn) => btn.classList.remove('img-filters__button--active'));
+  if (evt.target.classList.contains('img-filters__button--active')) {
+    return;
+  }
+  imgFiltersForm.querySelectorAll('.img-filters__button').forEach((btn) => {
+    if (btn !== evt.target) {
+      btn.classList.remove('img-filters__button--active');
+    }
+  });
   evt.target.classList.add('img-filters__button--active');
-  // console.log(evt.target.id);
-  const exe = filters[evt.target.id];
-  console.log(exe(array1));
-  exe(array1);
+  currentFilter = filters[evt.target.id];
+  renderSmallPictures(currentFilter());
 });
 
-// export {filterImages};
+export {turnFilterOn, currentFilter};

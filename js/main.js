@@ -8,13 +8,15 @@ import {setUserFormSubmit} from './validate-form.js';
 import {showSuccess} from './show-success-message.js';
 import {showError} from './show-error-message.js';
 import {getData} from './api.js';
-// import {filterImages} from './filter-images.js';
-import './filter-images.js';
+import {turnFilterOn, currentFilter} from './filter-images.js';
 
-getData(renderSmallPictures, showAlert);
+const onGetDataSucces = (data) => {
+  turnFilterOn(data);
+  renderSmallPictures(currentFilter());
+};
+
+getData(onGetDataSucces, showAlert);
 
 setUserFormSubmit(showSuccess, showError);
-
-// filterImages();
 
 

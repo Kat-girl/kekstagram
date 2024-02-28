@@ -1,12 +1,13 @@
 import {showBigPicture} from './show-big-picture.js';
 
 const pictures = document.querySelector('.pictures');
-const imgFilters = document.querySelector('.img-filters');
 
 const renderSmallPictures = (photos) => {
+  pictures.querySelectorAll('.picture').forEach((picture) => picture.remove());
   const fragment = document.createDocumentFragment();
   photos.forEach((photo) => {
     const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture').cloneNode(true);
+
     const pictureImg = pictureTemplate.querySelector('.picture__img');
     pictureImg.src = photo.url;
 
@@ -18,8 +19,8 @@ const renderSmallPictures = (photos) => {
 
     fragment.append(pictureTemplate);
   });
+
   pictures.append(fragment);
-  imgFilters.classList.remove('img-filters--inactive');
   showBigPicture(photos);
 };
 
