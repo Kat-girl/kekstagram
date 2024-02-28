@@ -49,4 +49,12 @@ const getUniqueArrayElements = (arr, length = 10) => {
   return arr2;
 };
 
-export {getRandomIntInclusive, getRandomArrayElement, getUniqueNumber, showAlert, getUniqueArrayElements};
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export {getRandomIntInclusive, getRandomArrayElement, getUniqueNumber, showAlert, getUniqueArrayElements, debounce};

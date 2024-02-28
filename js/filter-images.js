@@ -1,5 +1,5 @@
 import {getUniqueArrayElements} from './util.js';
-import {renderSmallPictures} from './render-small-pictures.js';
+// import {renderSmallPictures} from './render-small-pictures.js';
 
 const imgFiltersForm = document.querySelector('.img-filters__form');
 const imgFilters = document.querySelector('.img-filters');
@@ -24,18 +24,24 @@ const turnFilterOn = (data) => {
   currentFilter();
 };
 
-imgFiltersForm.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('img-filters__button--active')) {
-    return;
-  }
-  imgFiltersForm.querySelectorAll('.img-filters__button').forEach((btn) => {
-    if (btn !== evt.target) {
-      btn.classList.remove('img-filters__button--active');
-    }
-  });
-  evt.target.classList.add('img-filters__button--active');
-  currentFilter = filters[evt.target.id];
-  renderSmallPictures(currentFilter());
-});
 
-export {turnFilterOn, currentFilter};
+const setFilterClick = (cb) => {
+  imgFiltersForm.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('img-filters__button--active')) {
+      return;
+    }
+    imgFiltersForm.querySelectorAll('.img-filters__button').forEach((btn) => {
+      if (btn !== evt.target) {
+        btn.classList.remove('img-filters__button--active');
+      }
+    });
+    evt.target.classList.add('img-filters__button--active');
+    currentFilter = filters[evt.target.id];
+    // renderSmallPictures(currentFilter());
+    // debounce(() => renderSmallPictures(currentFilter(), RERENDER_DELAY));
+    cb();
+  });
+};
+
+
+export {turnFilterOn, currentFilter, setFilterClick};
