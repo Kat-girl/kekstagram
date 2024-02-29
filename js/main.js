@@ -9,6 +9,7 @@ import {showSuccess} from './show-success-message.js';
 import {showError} from './show-error-message.js';
 import {getData} from './api.js';
 import {turnFilterOn, currentFilter, setFilterClick} from './filter-images.js';
+import './upload-photo.js';
 
 const RERENDER_DELAY = 500;
 

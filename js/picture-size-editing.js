@@ -1,5 +1,3 @@
-// import {uploadForm} from './open-user-modal.js';
-
 const uploadForm = document.querySelector('#upload-select-image');
 
 const scaleControlSmaller = uploadForm.querySelector('.scale__control--smaller');

@@ -1,5 +1,3 @@
-// const uploadForm = document.querySelector('#upload-select-image');
-
 import {uploadForm, setDefaultSize} from './picture-size-editing.js';
 import {setDefaultFilters} from './picture-filters.js';
 
@@ -42,4 +40,4 @@ uploadFileInput.addEventListener('change', showImgUploadOverlay);
 
 uploadCancelButton.addEventListener('click', onCancelButtonClick);
 
-export {uploadForm, showImgUploadOverlay, hideImgUploadOverlay};
+export {uploadForm, showImgUploadOverlay, hideImgUploadOverlay, uploadFileInput};
