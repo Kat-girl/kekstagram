@@ -1,5 +1,4 @@
 import {getUniqueArrayElements} from './util.js';
-// import {renderSmallPictures} from './render-small-pictures.js';
 
 const imgFiltersForm = document.querySelector('.img-filters__form');
 const imgFilters = document.querySelector('.img-filters');
@@ -37,8 +36,6 @@ const setFilterClick = (cb) => {
     });
     evt.target.classList.add('img-filters__button--active');
     currentFilter = filters[evt.target.id];
-    // renderSmallPictures(currentFilter());
-    // debounce(() => renderSmallPictures(currentFilter(), RERENDER_DELAY));
     cb();
   });
 };

@@ -2,7 +2,6 @@ import {uploadFileInput} from './open-user-modal.js';
 import {previewImage} from './picture-size-editing.js';
 
 const effectsPreview = document.querySelectorAll('.effects__preview');
-console.log(effectsPreview);
 
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
